@@ -2,7 +2,7 @@ package eus.ehu.multiscene;
 
 import javafx.fxml.FXML;
 
-public class LoginController {
+public class LoginController implements FXController {
 
     private Application main;
 

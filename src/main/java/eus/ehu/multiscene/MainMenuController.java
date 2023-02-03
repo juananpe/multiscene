@@ -2,7 +2,7 @@ package eus.ehu.multiscene;
 
 import javafx.fxml.FXML;
 
-public class MainMenuController {
+public class MainMenuController implements FXController {
 
     private Application main;
 

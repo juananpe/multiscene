@@ -13,6 +13,19 @@ public class Application extends javafx.application.Application {
     private Scene loginScene;
     private Scene mainMenuScene;
 
+    class Window {
+        FXController c;
+        Parent ui;
+    }
+
+    private Window load(String fxmlFile) throws IOException {
+        Window window = new Window();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        window.ui = loader.load();
+        ((FXController) loader.getController()).setMain(this);
+        window.c = loader.getController();
+        return window;
+    }
     @Override
     public void start(Stage stage) throws IOException {
 
