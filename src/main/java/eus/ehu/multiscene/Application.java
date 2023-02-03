@@ -10,8 +10,8 @@ import java.io.IOException;
 public class Application extends javafx.application.Application {
 
     private Stage appStage;
-    private Scene loginScene;
-    private Scene mainMenuScene;
+    private Scene scene;
+    private Window mainWindow, loginWindow;
 
     class Window {
         FXController c;
@@ -29,39 +29,27 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login.fxml"));
-        Parent loginUI = loginLoader.load();
-        LoginController loginController = loginLoader.getController();
-        loginController.setMain(this);
-
-        FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
-        Parent mainMenuUI = mainMenuLoader.load();
-        MainMenuController mainMenuController = mainMenuLoader.getController();
-        mainMenuController.setMain(this);
-
-        loginScene = new Scene(loginUI);
-        mainMenuScene = new Scene(mainMenuUI);
         appStage = stage;
+        loginWindow = load("login.fxml");
+        mainWindow = load("mainMenu.fxml");
 
-        stage.setTitle("Login");
-        stage.setScene(loginScene);
-        stage.show();
+        show("Login");
     }
 
-    public static void main(String[] args) {
-        launch();
+    private void setupScene(Parent ui, String title) {
+        if (scene == null) {
+            scene = new Scene(ui);
+        }
+        scene.setRoot(ui);
+        appStage.setScene(scene);
+        appStage.setTitle(title);
+        appStage.show();
     }
 
     public void show(String title) {
         switch (title) {
-            case "Login" -> {
-                appStage.setTitle("Login");
-                appStage.setScene(loginScene);
-            }
-            case "Main Menu" -> {
-                appStage.setTitle("Main Menu");
-                appStage.setScene(mainMenuScene);
-            }
+            case "Login" -> setupScene(loginWindow.ui, "Login");
+            case "Main Menu" -> setupScene(mainWindow.ui, "Main Menu");
         }
     }
 }
