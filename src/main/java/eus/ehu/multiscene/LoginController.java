@@ -1,21 +1,16 @@
 package eus.ehu.multiscene;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class HelloController {
+public class LoginController {
+
+    private Application main;
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    void loginClick(ActionEvent event) {
-
+    void loginClick() {
+        // check credentials
+        // if correct, go to main menu
+        main.show("Main Menu");
     }
 
     @FXML
@@ -23,4 +18,7 @@ public class HelloController {
 
     }
 
+    public void setMain(Application application) {
+        this.main = application;
+    }
 }
